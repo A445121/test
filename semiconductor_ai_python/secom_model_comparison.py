@@ -57,7 +57,7 @@ def main() -> None:
         y_pred = model.predict(X_test)
         print(f"\n{name}")
         print("Accuracy:", accuracy_score(y_test, y_pred))
-        print(classification_report(y_test, y_pred))
+        print(classification_report(y_test, y_pred, zero_division=0))
 
 
 if __name__ == "__main__":

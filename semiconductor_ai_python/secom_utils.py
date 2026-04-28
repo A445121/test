@@ -77,6 +77,10 @@ def load_secom_raw(
     # Step 3：替沒有名稱的特徵欄位補上 feature_0, feature_1, ...
     # 這樣後續畫圖或輸出時會比較容易閱讀。
     features.columns = [f"feature_{i}" for i in range(features.shape[1])]
+
+    # 為了避免 PerformanceWarning (DataFrame is highly fragmented)
+    # 在插入新欄位前先建立一個連續的副本。
+    features = features.copy()
     features[LABEL_COLUMN] = labels.iloc[:, 0].astype(int).to_numpy()
     return features
 
